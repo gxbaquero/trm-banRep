@@ -13,7 +13,7 @@ enum34==1.1.6
 evernote==1.25.3
 gyp==0.1
 html5lib==1.1
-httplib2==0.14.0
+httplib2==0.18.0
 idna==2.6
 imutils==0.5.3
 ipaddress==1.0.17
