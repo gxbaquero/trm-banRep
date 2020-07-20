@@ -20,18 +20,17 @@ def run(tipo):
 		response = requests.get(URL)
 		if(response.status_code==200):
 			soup=BeautifulSoup(response.text,'html.parser')
-			TRM=soup.find("div",attrs={"class":"down-big"}).get_text()
+			TRM=soup.find("input",attrs={"id":"trm"}).get('value')
 			fecha=soup.find("td",attrs={"scope":"row"}).get_text();
 			if(tipo=='json'):
 				salida='{"day":"'+fecha.strip()+'","trm":"'+TRM.strip()+'"}'
 			if(tipo=='csv'):
 				salida=fecha.strip()+';'+TRM.strip()+'\n'
-			#print(TRM)	print((fecha.strip()))
-			return salida
-				
+			#print(TRM)	#print((fecha.strip()))
+			return salida				
 		else:
 			print('Error: ', response.status_code)
-	except e:
+	except ValueError as e:
 		print('Error:', e)
 
 def chkdate():
@@ -49,7 +48,8 @@ def chkfile():
 	try:
 		f=open(archivo, mode='r', encoding='utf-8')
 		g=open(dataStats, mode='r', encoding='utf-8')
-		jsonFile=f.read()		
+		jsonFile=f.read()
+		#print(jsonFile)
 		csvFile=g.read()
 	finally:
 		f.close()

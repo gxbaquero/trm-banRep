@@ -1,0 +1,39 @@
+import requests
+import datetime
+
+from bs4 import BeautifulSoup
+
+URL ='https://www.banrep.gov.co/indicators/widgets/TRM/ES/show'
+
+def run():
+	try:
+		response = requests.get(URL)
+		if(response.status_code==200):
+			soup=BeautifulSoup(response.text,'html.parser')
+			TRM=soup.find("div",attrs={"class":"down-big"}).get_text()
+			fecha=soup.find("td",attrs={"scope":"row"}).get_text();
+			salida='{"day":"'+fecha.strip()+'","trm":"'+TRM.strip()+'"}'
+			#print(TRM)	print((fecha.strip()))
+			print(salida)
+				
+		else:
+			print('Error: ', response.status_code)
+		
+	except e:
+		print('Error:', e)
+
+def chkdate():
+	today = datetime.date.today()
+	tt = today.timetuple()
+	dayweek=tt.tm_wday
+	if(dayweek==6):
+		today=today- relativedelta(days=1)
+	return today
+
+def chkfile():
+	dia=chkdate()
+	print(dia)
+
+if __name__ == '__main__':
+	#run()
+	chkfile()
