@@ -37,7 +37,7 @@ pygobject==3.26.1
 pyodbc==4.0.17
 pyparsing==2.4.2
 pyparted==3.11.1
-PyPDF2==1.26.0
+PyPDF2==1.27.5
 pypdfocr==0.9.1
 pysqlite==2.7.0
 python-apt==1.6.5+ubuntu0.3
